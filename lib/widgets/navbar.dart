@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'nav_drawer.dart';
+
 class NavbarDesign extends StatelessWidget {
   bool isTitleCenter = true;
   String titleText = "PracticeNav";
@@ -14,6 +16,7 @@ class NavbarDesign extends StatelessWidget {
     return DefaultTabController(
       length: actions.length,
       child: Scaffold(
+        drawer: NavigationDrawerWidget(),
         appBar: AppBar(
           titleSpacing: 10,
           title: Text(
@@ -24,12 +27,18 @@ class NavbarDesign extends StatelessWidget {
                 ?.copyWith(fontWeight: FontWeight.w400, color: Colors.black),
           ),
           centerTitle: isTitleCenter ? true : false,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.black38,
-            ),
-            onPressed: () {},
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(
+                  Icons.menu,
+                  color: Colors.black38,
+                ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              );
+            },
           ),
           actions: [
             // using Wrap to display page buttons
